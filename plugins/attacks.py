@@ -32,10 +32,13 @@ def load_attacks(bot):
     """
     :type bot: cloudbot.bot.CloudBot
     """
-    global larts, flirts, kills, slaps
+    global larts, flirts, kills, slaps, lewds
 
     with codecs.open(os.path.join(bot.data_dir, "larts.txt"), encoding="utf-8") as f:
         larts = [line.strip() for line in f.readlines() if not line.startswith("//")]
+
+    with codecs.open(os.path.join(bot.data_dir, "lewds.txt"), encoding="utf-8") as f:
+        lewds = [line.strip() for line in f.readlines() if not line.startswith("//")]
 
     with codecs.open(os.path.join(bot.data_dir, "flirts.txt"), encoding="utf-8") as f:
         flirts = [line.strip() for line in f.readlines() if not line.startswith("//")]
@@ -64,6 +67,24 @@ def lart(text, conn, nick, action):
 
     # act out the message
     action(phrase.format(user=target))
+
+@asyncio.coroutine
+@hook.command
+def lewd(text, conn, nick, message):
+    """<user> - lewds <user>"""
+    target = text.strip()
+
+    if not is_valid(target):
+        return "I can't attack that."
+
+    if is_self(conn, target):
+        # user is trying to make the bot attack itself!
+        target = nick
+
+    phrase = "{user}: {phrase}"
+
+    # act out the message
+    message(phrase.format(user=target, phrase = random.choice(lewds)))
 
 
 @asyncio.coroutine
