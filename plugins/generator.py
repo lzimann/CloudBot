@@ -97,7 +97,7 @@ def load_vocab(bot):
 
 @asyncio.coroutine
 @hook.command
-def bad_erp(text, conn, nick, message):
+def erp(text, conn, nick, message):
     """<user> - badly erps with <user>"""
     target = text.strip()
 
@@ -109,6 +109,6 @@ def bad_erp(text, conn, nick, message):
         target = nick
 
     # act out the message
-    erp = " ".join(generate_sentences(3))
+    erp = " ".join(generate_sentences(1))
     phrase = "{user}: {erp}"
     message(phrase.format(user=target, erp = erp))
