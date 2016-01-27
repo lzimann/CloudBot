@@ -1,6 +1,7 @@
 import json
 import random
 import re
+import asyncio
 
 from cloudbot import hook
 
