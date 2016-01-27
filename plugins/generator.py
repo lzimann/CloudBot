@@ -2,6 +2,7 @@ import json
 import random
 import re
 import asyncio
+import os
 
 from cloudbot import hook
 
