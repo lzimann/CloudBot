@@ -87,9 +87,9 @@ def is_self(conn, target):
 @hook.on_start()
 def load_vocab(bot):
     global vocab, sentences
-    with open(os.path.join(bot.data_dir, 'sentences.json)) as f:
+    with open(os.path.join(bot.data_dir, 'sentences.json')) as f:
         sentences = json.load(f)
-    with open(os.path.join(bot.data_dir, 'vocabulary.json)) as f:
+    with open(os.path.join(bot.data_dir, 'vocabulary.json')) as f:
         vocab = json.load(f)
 
 @asyncio.coroutine
